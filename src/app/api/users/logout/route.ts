@@ -1,21 +1,15 @@
-import { connect } from "@/dbConfig/dbConfig";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-// Connect to database everytime in routes
-connect();
-
-export async function GET(request: NextRequest) {
+export async function GET() {
 	try {
 		const response = NextResponse.json({
-			message: "Logout Successfully",
+			message: "Logout successful",
 			success: true,
 		});
-
 		response.cookies.set("token", "", {
 			httpOnly: true,
 			expires: new Date(0),
 		});
-
 		return response;
 	} catch (error: any) {
 		return NextResponse.json({ error: error.message }, { status: 500 });
